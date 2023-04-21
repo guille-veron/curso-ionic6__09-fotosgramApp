@@ -70,10 +70,29 @@ export class Tab2Page {
       mediaType: this.camera.MediaType.PICTURE,
       correctOrientation: true,
       sourceType: this.camera.PictureSourceType.CAMERA
-
     }
+
+    this.getPicture(options)
+  }
     
-    this.camera.getPicture(options).then((imageData) => {
+
+  elegirFoto(){
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+    }
+
+    this.getPicture(options)
+
+  }
+
+  getPicture(opt: CameraOptions){
+
+    this.camera.getPicture(opt).then((imageData) => {
       
       const img = window.Ionic.WebView.convertFileSrc( imageData);
 
@@ -84,6 +103,6 @@ export class Tab2Page {
     }, (err) => {
      console.log(err);
     });
-  }
+  }  
 
 }
